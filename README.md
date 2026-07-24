@@ -172,13 +172,11 @@ The [Release workflow](.github/workflows/release.yml) runs on the tag, verifies 
 `package.json`, then builds and publishes to npm. The publish job runs in the `npm` GitHub
 Environment, so it waits for approval in the Actions UI if the environment has required reviewers.
 
-**First-ever publish** must use an `NPM_TOKEN` secret: npm cannot pre-configure trusted publishing
-for a package that does not exist yet. Create an npm token that can bypass 2FA (CI cannot answer a
-one-time-password prompt), add it as the repository secret `NPM_TOKEN`, and push the first tag.
-**After** that, configure the Trusted Publisher on npmjs.com (package Settings → Trusted Publisher
-→ GitHub Actions → user `chrisjsewell`, repo `highlightjs-langs`, workflow `release.yml`,
-environment `npm`) and delete the secret; subsequent releases publish via OIDC with no long-lived
-credentials.
+Publishing uses npm [trusted publishing](https://docs.npmjs.com/trusted-publishers) (OIDC): no
+tokens, and provenance is attached automatically. The trusted publisher is bound to this
+repository, the `release.yml` workflow and the `npm` environment. (Bootstrapping a brand-new
+package needs a one-off token — see the comment header in `release.yml` if that ever applies
+again.)
 
 ## License
 
