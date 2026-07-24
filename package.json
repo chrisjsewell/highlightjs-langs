@@ -1,0 +1,106 @@
+{
+  "name": "highlightjs-langs",
+  "version": "0.1.0",
+  "description": "highlight.js language grammars for reStructuredText and MyST Markdown",
+  "keywords": [
+    "highlight.js",
+    "highlightjs",
+    "hljs",
+    "syntax highlighting",
+    "restructuredtext",
+    "rst",
+    "myst",
+    "markdown",
+    "sphinx",
+    "docutils"
+  ],
+  "license": "MIT",
+  "author": "Chris Sewell",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chrisjsewell/highlightjs-langs.git"
+  },
+  "homepage": "https://github.com/chrisjsewell/highlightjs-langs#readme",
+  "bugs": "https://github.com/chrisjsewell/highlightjs-langs/issues",
+  "type": "module",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
+    },
+    "./restructuredtext": {
+      "import": {
+        "types": "./dist/restructuredtext.d.ts",
+        "default": "./dist/restructuredtext.js"
+      },
+      "require": {
+        "types": "./dist/restructuredtext.d.cts",
+        "default": "./dist/restructuredtext.cjs"
+      }
+    },
+    "./rst": {
+      "import": {
+        "types": "./dist/restructuredtext.d.ts",
+        "default": "./dist/restructuredtext.js"
+      },
+      "require": {
+        "types": "./dist/restructuredtext.d.cts",
+        "default": "./dist/restructuredtext.cjs"
+      }
+    },
+    "./myst": {
+      "import": {
+        "types": "./dist/myst.d.ts",
+        "default": "./dist/myst.js"
+      },
+      "require": {
+        "types": "./dist/myst.d.cts",
+        "default": "./dist/myst.cjs"
+      }
+    },
+    "./dist/*": "./dist/*",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist"
+  ],
+  "sideEffects": [
+    "dist/*.min.js"
+  ],
+  "scripts": {
+    "build": "tsup",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:update": "UPDATE_EXPECT=1 vitest run",
+    "lint": "biome check .",
+    "lint:fix": "biome check --write ."
+  },
+  "peerDependencies": {
+    "highlight.js": "^11.0.0"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.5.5",
+    "@j178/prek": "^0.4.10",
+    "@types/node": "^26.1.1",
+    "highlight.js": "^11.11.1",
+    "tsup": "^8.5.1",
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.10"
+  }
+}
