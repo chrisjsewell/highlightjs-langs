@@ -1,0 +1,6 @@
+// Find all people who know each other
+MATCH (a:Person {name: 'Alice'})-[r:KNOWS]->(b:Person)
+WHERE a.age > 30 AND b.name STARTS WITH 'B'
+RETURN a.name, collect(b.name) AS friends, count(r)
+ORDER BY a.name DESC
+LIMIT 10

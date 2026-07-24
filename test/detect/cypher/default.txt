@@ -1,0 +1,8 @@
+// Cypher query
+MATCH (a:Person {name: 'Alice'})-[:KNOWS]->(friend:Person)
+WHERE friend.age >= 21 AND NOT (friend)-[:BLOCKED]->(a)
+OPTIONAL MATCH (friend)-[r:WORKS_AT]->(c:Company)
+WITH friend, collect(c.name) AS companies, count(r) AS jobs
+UNWIND companies AS company
+RETURN friend.name AS name, company, jobs
+ORDER BY jobs DESC LIMIT 25

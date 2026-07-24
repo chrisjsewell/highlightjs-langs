@@ -5,20 +5,22 @@ Guidance for agents and human contributors working in this repository.
 ## Purpose
 
 `highlightjs-langs` is an npm package providing third-party [highlight.js](https://highlightjs.org)
-grammars for **reStructuredText** (aliases `rst`, `rest`) and **MyST Markdown** (aliases `mystmd`,
-`myst-markdown`), written in TypeScript. It ships ESM + CJS library builds, TypeScript declarations,
-and self-registering browser bundles, all produced by tsup.
+grammars for **reStructuredText** (aliases `rst`, `rest`), **MyST Markdown** (aliases `mystmd`,
+`myst-markdown`) and **Cypher**, written in TypeScript. It ships ESM + CJS library builds,
+TypeScript declarations, and self-registering browser bundles, all produced by tsup.
 
 ## Repository map
 
 | Path                     | Contents                                                                   |
 | ------------------------ | -------------------------------------------------------------------------- |
-| `src/languages/*.ts`     | The grammar definitions (`restructuredtext.ts`, `myst.ts`)                  |
+| `src/languages/*.ts`     | The grammar definitions (`restructuredtext.ts`, `myst.ts`, `cypher.ts`)     |
 | `src/browser/*.ts`       | Self-registering wrappers that call `hljs.registerLanguage` on the global  |
 | `src/index.ts`           | Named exports (`restructuredtext`, `myst`, `registerLanguages`)            |
 | `test/markup.test.ts`    | Markup harness: highlights `test/markup/<lang>/<name>.txt` vs `.expect.txt` |
 | `test/markup/`           | Markup fixtures (input `.txt` + byte-exact `.expect.txt`)                   |
 | `test/api.test.ts`       | Registration, auto-detection and pathological-input tests                  |
+| `test/regex-safety.test.ts` | recheck ReDoS scan of every grammar regex (with justified allowlist)     |
+| `test/fuzz.test.ts`      | Seeded corpus fuzzing with time budgets                                     |
 | `test/detect/`           | Auto-detection samples (`<lang>/default.txt`)                              |
 | `demo/`                  | Static demo page loading the built bundles                                  |
 | `.github/workflows/`     | `ci.yml` (lint / typecheck / test) and `release.yml` (tag → npm)          |
@@ -43,6 +45,9 @@ and self-registering browser bundles, all produced by tsup.
   support, so it is banned by policy. Lookahead is fine.
 - **Avoid catastrophic backtracking.** Prefer bounded quantifiers; do not nest unbounded groups
   (no `(a+)+` shapes). Pathological-input timing tests live in `test/api.test.ts` — keep them green.
+- **Every regex is ReDoS-scanned.** `test/regex-safety.test.ts` runs recheck over all grammar
+  regexes; a "vulnerable" verdict fails CI. Additions to its allowlist need a written
+  justification plus a covering timing test. `test/fuzz.test.ts` fuzzes seeded random documents.
 - **Mode order matters.** Inside a `contains` array, the order of modes breaks ties when several
   match at the same position: earlier modes win. Reorder deliberately, not by accident.
 - **Keep `relevance` conventions.** Use `relevance: 0` for patterns common to many languages, and

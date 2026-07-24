@@ -64,7 +64,7 @@ export default function restructuredtext(hljs: HLJSApi): Language {
 
   // `.. _name: url`, `.. _\`phrase name\`: url`, `.. __: url`
   const TARGET_DEF: Mode = {
-    begin: [/^[ \t]*\.\.[ \t]+/, /_/, /`[^`\n]+`|[^:\n]*/, /:/],
+    begin: [/^[ \t]*\.\.[ \t]+/, /_/, /`[^`\n]{1,200}`|[^:\n]{0,200}/, /:/],
     beginScope: {
       1: "punctuation",
       2: "symbol",
@@ -260,11 +260,13 @@ export default function restructuredtext(hljs: HLJSApi): Language {
     relevance: 1,
   };
 
-  // Standalone references: name_, name__ (length-bounded: an unbounded tail
-  // backtracks quadratically on "a.a.a…" floods).
+  // Standalone references: name_, name__. Segment-locked shape: a flat
+  // [\w.+-]* tail backtracks quadratically on "a.a.a…" floods, whereas
+  // punctuation-separated segments leave only a few backtrack points.
   const STANDALONE_REF: Mode = {
     scope: "symbol",
-    match: /\b[A-Za-z0-9][\w.+-]{0,60}__?(?=[\s.,;:!?)\]"']|$)/,
+    match:
+      /\b[A-Za-z0-9]\w{0,60}(?:[.+-]\w{1,60}){0,15}__?(?=[\s.,;:!?)\]"']|$)/,
     relevance: 0,
   };
 

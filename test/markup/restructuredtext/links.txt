@@ -2,7 +2,7 @@ See the Python_ site, a `phrase reference`_, an anonymous__ ref,
 an `embedded <https://example.org/embed>`_ link, and plain
 https://example.org/plain text.
 
-An _`inline target` sits here.
+An _`inline target` sits here, and a long-multi-part-reference-name-with-many-segments_ works.
 
 .. _Python: https://www.python.org/
 .. _phrase reference:

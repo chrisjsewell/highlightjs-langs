@@ -1,6 +1,6 @@
 import { defineConfig } from "tsup";
 
-const banner = `/*! highlightjs-langs | reStructuredText & MyST grammars for highlight.js | MIT | https://github.com/chrisjsewell/highlightjs-langs */`;
+const banner = `/*! highlightjs-langs | reStructuredText, MyST & Cypher grammars for highlight.js | MIT | https://github.com/chrisjsewell/highlightjs-langs */`;
 
 export default defineConfig([
   // Library builds (ESM + CJS + type declarations).
@@ -9,6 +9,7 @@ export default defineConfig([
       index: "src/index.ts",
       restructuredtext: "src/languages/restructuredtext.ts",
       myst: "src/languages/myst.ts",
+      cypher: "src/languages/cypher.ts",
     },
     format: ["esm", "cjs"],
     dts: true,
@@ -21,6 +22,7 @@ export default defineConfig([
     entry: {
       restructuredtext: "src/browser/restructuredtext.ts",
       myst: "src/browser/myst.ts",
+      cypher: "src/browser/cypher.ts",
     },
     format: ["iife"],
     minify: true,

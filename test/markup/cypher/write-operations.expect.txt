@@ -1,0 +1,11 @@
+<span class="hljs-keyword">CREATE</span> (n<span class="hljs-punctuation">:</span><span class="hljs-type">Person</span> {name: <span class="hljs-variable">$name</span>, born: <span class="hljs-number">1984</span>})
+<span class="hljs-keyword">MERGE</span> (a)<span class="hljs-operator">-[</span>rel<span class="hljs-punctuation">:</span><span class="hljs-type">LIKES</span><span class="hljs-operator">]-&gt;</span>(b)
+<span class="hljs-keyword">ON</span> <span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">SET</span> rel.since = <span class="hljs-title function_ invoke__">timestamp</span><span class="hljs-punctuation">(</span>)
+<span class="hljs-keyword">DETACH</span> <span class="hljs-keyword">DELETE</span> n
+
+<span class="hljs-comment">/* a multi-line
+   comment */</span>
+<span class="hljs-keyword">WITH</span> <span class="hljs-title function_ invoke__">toUpper</span><span class="hljs-punctuation">(</span>n.name) <span class="hljs-keyword">AS</span> upper, <span class="hljs-symbol">`weird prop`</span> <span class="hljs-keyword">AS</span> wp
+<span class="hljs-keyword">UNWIND</span> <span class="hljs-title function_ invoke__">range</span><span class="hljs-punctuation">(</span><span class="hljs-number">1</span>, <span class="hljs-number">10</span>) <span class="hljs-keyword">AS</span> x
+<span class="hljs-keyword">CALL</span> <span class="hljs-title function_ invoke__">db.labels</span><span class="hljs-punctuation">(</span>) <span class="hljs-keyword">YIELD</span> label
+<span class="hljs-keyword">RETURN</span> label, x, <span class="hljs-variable">$`odd param`</span>

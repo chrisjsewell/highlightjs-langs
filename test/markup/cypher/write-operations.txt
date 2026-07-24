@@ -1,0 +1,11 @@
+CREATE (n:Person {name: $name, born: 1984})
+MERGE (a)-[rel:LIKES]->(b)
+ON CREATE SET rel.since = timestamp()
+DETACH DELETE n
+
+/* a multi-line
+   comment */
+WITH toUpper(n.name) AS upper, `weird prop` AS wp
+UNWIND range(1, 10) AS x
+CALL db.labels() YIELD label
+RETURN label, x, $`odd param`
