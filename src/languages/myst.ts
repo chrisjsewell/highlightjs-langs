@@ -198,7 +198,14 @@ export default function myst(hljs: HLJSApi): Language {
     match: /^\[\^[^\]\n]+\]:/,
   };
 
-  const CONTAINABLE: Mode[] = [ESCAPE, INLINE_HTML, LINK, ROLE, MATH_INLINE, FOOTNOTE_REF];
+  const CONTAINABLE: Mode[] = [
+    ESCAPE,
+    INLINE_HTML,
+    LINK,
+    ROLE,
+    MATH_INLINE,
+    FOOTNOTE_REF,
+  ];
   for (const m of [BOLD, ITALIC, BOLD_WITHOUT_ITALIC, ITALIC_WITHOUT_BOLD]) {
     m.contains = (m.contains ?? []).concat(CONTAINABLE);
   }
@@ -357,7 +364,8 @@ export default function myst(hljs: HLJSApi): Language {
   };
   const AMSMATH: Mode = {
     scope: "formula",
-    begin: /^[ \t]*\\begin\{(?:equation|align|alignat|gather|multline|flalign|eqnarray)\*?\}/,
+    begin:
+      /^[ \t]*\\begin\{(?:equation|align|alignat|gather|multline|flalign|eqnarray)\*?\}/,
     end: /\\end\{(?:equation|align|alignat|gather|multline|flalign|eqnarray)\*?\}/,
     relevance: 2,
   };

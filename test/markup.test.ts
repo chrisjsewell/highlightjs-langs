@@ -31,7 +31,10 @@ for (const language of fs.readdirSync(markupRoot).sort()) {
       it(file.replace(/\.txt$/, ""), () => {
         const code = fs.readFileSync(path.join(languageDir, file), "utf8");
         const actual = hljs.highlight(code, { language }).value;
-        const expectFile = path.join(languageDir, file.replace(/\.txt$/, ".expect.txt"));
+        const expectFile = path.join(
+          languageDir,
+          file.replace(/\.txt$/, ".expect.txt"),
+        );
 
         if (update || !fs.existsSync(expectFile)) {
           fs.writeFileSync(expectFile, actual);

@@ -29,8 +29,19 @@ export default function restructuredtext(hljs: HLJSApi): Language {
 
   // `.. |name| replace:: value`
   const SUBSTITUTION_DEF: Mode = {
-    begin: [/^[ \t]*\.\.[ \t]+/, /\|[^|\n]+\|/, /[ \t]+/, /[\w.+-]+(?::[\w.+-]+)*/, /::/],
-    beginScope: { 1: "punctuation", 2: "template-variable", 4: "keyword", 5: "punctuation" },
+    begin: [
+      /^[ \t]*\.\.[ \t]+/,
+      /\|[^|\n]+\|/,
+      /[ \t]+/,
+      /[\w.+-]+(?::[\w.+-]+)*/,
+      /::/,
+    ],
+    beginScope: {
+      1: "punctuation",
+      2: "template-variable",
+      4: "keyword",
+      5: "punctuation",
+    },
     starts: {
       end: /$/,
       contains: [{ scope: "string", match: /[^\n]+/ }],
@@ -48,7 +59,12 @@ export default function restructuredtext(hljs: HLJSApi): Language {
   // `.. _name: url`, `.. _\`phrase name\`: url`, `.. __: url`
   const TARGET_DEF: Mode = {
     begin: [/^[ \t]*\.\.[ \t]+/, /_/, /`[^`\n]+`|[^:\n]*/, /:/],
-    beginScope: { 1: "punctuation", 2: "symbol", 3: "symbol", 4: "punctuation" },
+    beginScope: {
+      1: "punctuation",
+      2: "symbol",
+      3: "symbol",
+      4: "punctuation",
+    },
     starts: {
       end: /$/,
       contains: [{ scope: "link", match: /[^\n]+/ }],

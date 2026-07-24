@@ -30,7 +30,10 @@ describe("auto-detection", () => {
   const detectRoot = fileURLToPath(new URL("./detect", import.meta.url));
   for (const language of fs.readdirSync(detectRoot).sort()) {
     it(`detects ${language}`, () => {
-      const sample = fs.readFileSync(path.join(detectRoot, language, "default.txt"), "utf8");
+      const sample = fs.readFileSync(
+        path.join(detectRoot, language, "default.txt"),
+        "utf8",
+      );
       const result = hljs.highlightAuto(sample);
       expect(result.language).toBe(language);
     });
