@@ -1,0 +1,21 @@
+Inline `code` span.
+
+```python
+def f(x):
+    return x + 1
+```
+
+```{code-block} python
+:linenos:
+:emphasize-lines: 2
+
+def g(y):
+    return y - 1
+```
+
+````{code-cell} python
+---
+tags: [hide-input]
+---
+print("hi")
+````

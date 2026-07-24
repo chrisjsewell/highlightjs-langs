@@ -1,0 +1,11 @@
+See the <span class="hljs-symbol">Python_</span> site, a <span class="hljs-string">`phrase reference`_</span>, an <span class="hljs-symbol">anonymous__</span> ref,
+an <span class="hljs-string">`embedded <span class="hljs-link">&lt;https://example.org/embed&gt;</span>`_</span> link, and plain
+<span class="hljs-link">https://example.org/plain</span> text.
+
+An <span class="hljs-symbol">_`inline target`</span> sits here.
+
+<span class="hljs-punctuation">.. </span><span class="hljs-symbol">_</span><span class="hljs-symbol">Python</span><span class="hljs-punctuation">:</span><span class="hljs-link"> https://www.python.org/</span>
+<span class="hljs-punctuation">.. </span><span class="hljs-symbol">_</span><span class="hljs-symbol">phrase reference</span><span class="hljs-punctuation">:</span>
+<span class="hljs-punctuation">.. </span><span class="hljs-symbol">_</span><span class="hljs-symbol">_</span><span class="hljs-punctuation">:</span><span class="hljs-link"> https://anonymous.example.com/</span>
+
+<span class="hljs-symbol">__</span> <span class="hljs-link">https://example.com/short-anonymous</span>

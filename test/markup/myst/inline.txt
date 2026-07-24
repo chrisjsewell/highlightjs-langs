@@ -1,0 +1,11 @@
+**bold**, *italic*, _also italic_, `code`, <span>html</span>,
+a [link](https://example.org) and an entity &amp;.
+
+Escaped: \*literal asterisks\*.
+
+> A blockquote with **bold** and a {ref}`target`.
+
+- list item one
+- item with $x^2$ math
+
+1. numbered

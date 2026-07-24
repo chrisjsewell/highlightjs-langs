@@ -1,0 +1,5 @@
+(intro)=
+# Introduction
+
+See [the intro](#intro) or {ref}`intro`, water H{sub}`2`O,
+inline math {math}`a^2+b^2=c^2` and {py:func}`os.getcwd`.

@@ -1,0 +1,6 @@
+Here is a footnote reference.<span class="hljs-symbol">[^first]</span> And another.<span class="hljs-symbol">[^long-note]</span>
+
+<span class="hljs-symbol">[^first]:</span> The first footnote.
+<span class="hljs-symbol">[^long-note]:</span> Multi-paragraph footnotes indent
+<span class="hljs-code">    their continuation lines.
+</span>

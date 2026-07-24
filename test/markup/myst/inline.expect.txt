@@ -1,0 +1,11 @@
+<span class="hljs-strong">**bold**</span>, <span class="hljs-emphasis">*italic*</span>, <span class="hljs-emphasis">_also italic_</span>, <span class="hljs-code">`code`</span>, <span class="language-xml"><span class="hljs-tag">&lt;<span class="hljs-name">span</span>&gt;</span></span>html<span class="language-xml"><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span></span>,
+a [<span class="hljs-string">link</span>](<span class="hljs-link">https://example.org</span>) and an entity <span class="hljs-literal">&amp;amp;</span>.
+
+Escaped: <span class="hljs-char escape_">\*</span>literal asterisks<span class="hljs-char escape_">\*</span>.
+
+<span class="hljs-quote">&gt; A blockquote with <span class="hljs-strong">**bold**</span> and a <span class="hljs-punctuation">{</span><span class="hljs-keyword">ref</span><span class="hljs-punctuation">}</span>`target`.</span>
+
+<span class="hljs-bullet">-</span> list item one
+<span class="hljs-bullet">-</span> item with <span class="hljs-formula">$x^2$</span> math
+
+<span class="hljs-bullet">1.</span> numbered

@@ -1,0 +1,11 @@
+<span class="hljs-meta">---</span>
+<span class="language-yaml"><span class="hljs-attr">title:</span> <span class="hljs-string">MyST</span> <span class="hljs-string">Demo</span>
+<span class="hljs-attr">authors:</span>
+  <span class="hljs-bullet">-</span> <span class="hljs-attr">name:</span> <span class="hljs-string">Jane</span> <span class="hljs-string">Doe</span>
+<span class="hljs-attr">kernelspec:</span>
+  <span class="hljs-attr">name:</span> <span class="hljs-string">python3</span>
+</span><span class="hljs-meta">---</span>
+
+<span class="hljs-section"># Introduction</span>
+
+Body text.

@@ -1,0 +1,18 @@
+A literal block follows::
+
+    raw = "verbatim *text*"
+    print(raw)
+
+Or the expanded form:
+
+::
+
+    also literal
+
+>>> print("hello")
+hello
+>>> 1 + 1
+2
+
+| Verse line one
+| Verse line two

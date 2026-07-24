@@ -1,0 +1,6 @@
+Inline markup: *emphasis*, **strong**, and ``inline literal``.
+
+Press :kbd:`Ctrl+C`, see :math:`a^2 + b^2 = c^2`, call
+:py:func:`os.getcwd`, and reference the `default role`.
+
+Escaped: \*not emphasis\* and a \| literal pipe.

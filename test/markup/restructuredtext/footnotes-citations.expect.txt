@@ -1,0 +1,7 @@
+See the footnote <span class="hljs-symbol">[#note]_</span>, a numbered one <span class="hljs-symbol">[1]_</span>, a symbol one <span class="hljs-symbol">[*]_</span>,
+and a citation <span class="hljs-symbol">[SMITH2003]_</span>.
+
+<span class="hljs-punctuation">.. </span><span class="hljs-symbol">[1]</span> A numbered footnote (no colon after the bracket).
+<span class="hljs-punctuation">.. </span><span class="hljs-symbol">[#note]</span> An autonumbered footnote.
+<span class="hljs-punctuation">.. </span><span class="hljs-symbol">[*]</span> A symbol footnote.
+<span class="hljs-punctuation">.. </span><span class="hljs-symbol">[SMITH2003]</span> Smith, J. <span class="hljs-emphasis">*A Title*</span>. 2003.

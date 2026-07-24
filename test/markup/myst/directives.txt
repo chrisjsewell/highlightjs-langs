@@ -1,0 +1,19 @@
+```{note}
+This is a **MyST** admonition with *Markdown* inside.
+```
+
+:::{warning}
+Colon-fence form, easier to nest.
+:::
+
+::::{tab-set}
+:::{tab-item} One
+Content one.
+:::
+::::
+
+~~~{admonition} Custom title
+:class: tip
+
+Nested {py:func}`os.getcwd` role.
+~~~

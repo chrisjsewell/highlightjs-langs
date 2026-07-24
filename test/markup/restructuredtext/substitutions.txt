@@ -1,0 +1,4 @@
+The |biohazard| symbol and the |RST|_ reference.
+
+.. |biohazard| image:: biohazard.png
+.. |RST| replace:: reStructuredText

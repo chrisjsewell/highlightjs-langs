@@ -1,0 +1,6 @@
+<span class="hljs-punctuation">```</span><span class="hljs-punctuation">{</span><span class="hljs-keyword">eval-rst</span><span class="hljs-punctuation">}</span><span class="language-restructuredtext">
+<span class="hljs-punctuation">.. </span><span class="hljs-keyword">note</span><span class="hljs-punctuation">::</span>
+   Real reStructuredText in here.
+
+See <span class="hljs-keyword">:py:func:</span><span class="hljs-string">`os.getcwd`</span> and <span class="hljs-code">``literals``</span>.
+</span><span class="hljs-punctuation">```</span>

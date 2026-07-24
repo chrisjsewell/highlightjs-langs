@@ -1,0 +1,7 @@
+See the footnote [#note]_, a numbered one [1]_, a symbol one [*]_,
+and a citation [SMITH2003]_.
+
+.. [1] A numbered footnote (no colon after the bracket).
+.. [#note] An autonumbered footnote.
+.. [*] A symbol footnote.
+.. [SMITH2003] Smith, J. *A Title*. 2003.

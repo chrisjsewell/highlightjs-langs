@@ -1,0 +1,11 @@
+% a comment line, not rendered
+
+First block.
+
++++ {"tag": "value"}
+
+Second block.
+
+---
+
+After a thematic break.

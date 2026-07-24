@@ -1,0 +1,18 @@
+:Author: Jane Doe
+:Version: 1.0 of 2001/08/08
+
+- first bullet
+- second, with
+  a wrapped line
+
+* starred item
++ plus item
+
+1. arabic
+2. next
+#. auto-numbered
+a) alpha style
+(iv) roman in parens
+
+term
+    Definition of the term.

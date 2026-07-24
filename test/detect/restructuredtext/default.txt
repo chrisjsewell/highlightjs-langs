@@ -1,0 +1,17 @@
+============
+ Page Title
+============
+
+:Author: Jane Doe
+
+.. note::
+   Use :py:func:`os.getcwd` to get the cwd.
+
+.. code-block:: python
+
+   print("hello")
+
+See the docs_ for more, or the |sub| reference.
+
+.. _docs: https://example.org
+.. |sub| replace:: substitution

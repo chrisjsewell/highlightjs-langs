@@ -1,0 +1,19 @@
+<span class="hljs-punctuation">```</span><span class="hljs-punctuation">{</span><span class="hljs-keyword">note</span><span class="hljs-punctuation">}</span>
+This is a <span class="hljs-strong">**MyST**</span> admonition with <span class="hljs-emphasis">*Markdown*</span> inside.
+<span class="hljs-punctuation">```</span>
+
+<span class="hljs-punctuation">:::</span><span class="hljs-punctuation">{</span><span class="hljs-keyword">warning</span><span class="hljs-punctuation">}</span>
+Colon-fence form, easier to nest.
+<span class="hljs-punctuation">:::</span>
+
+<span class="hljs-punctuation">::::</span><span class="hljs-punctuation">{</span><span class="hljs-keyword">tab-set</span><span class="hljs-punctuation">}</span>
+<span class="hljs-punctuation">:::</span><span class="hljs-punctuation">{</span><span class="hljs-keyword">tab-item</span><span class="hljs-punctuation">}</span><span class="hljs-string"> One</span>
+Content one.
+<span class="hljs-punctuation">:::</span>
+<span class="hljs-punctuation">::::</span>
+
+<span class="hljs-punctuation">~~~</span><span class="hljs-punctuation">{</span><span class="hljs-keyword">admonition</span><span class="hljs-punctuation">}</span><span class="hljs-string"> Custom title</span>
+<span class="hljs-attr">:class:</span> <span class="hljs-string">tip</span>
+
+Nested <span class="hljs-punctuation">{</span><span class="hljs-keyword">py:func</span><span class="hljs-punctuation">}</span><span class="hljs-code">`os.getcwd`</span> role.
+<span class="hljs-punctuation">~~~</span>

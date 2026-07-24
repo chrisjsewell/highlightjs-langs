@@ -1,0 +1,21 @@
+Inline <span class="hljs-code">`code`</span> span.
+
+<span class="hljs-code">```python
+def f(x):
+    return x + 1
+```</span>
+
+<span class="hljs-punctuation">```</span><span class="hljs-punctuation">{</span><span class="hljs-keyword">code-block</span><span class="hljs-punctuation">}</span><span class="hljs-string"> python</span>
+<span class="hljs-attr">:linenos:</span>
+<span class="hljs-attr">:emphasize-lines:</span> <span class="hljs-string">2</span>
+
+def g(y):
+    return y - 1
+<span class="hljs-punctuation">```</span>
+
+<span class="hljs-punctuation">````</span><span class="hljs-punctuation">{</span><span class="hljs-keyword">code-cell</span><span class="hljs-punctuation">}</span><span class="hljs-string"> python</span>
+<span class="hljs-meta">---</span><span class="language-yaml">
+<span class="hljs-attr">tags:</span> [<span class="hljs-string">hide-input</span>]
+</span><span class="hljs-meta">---</span>
+print(&quot;hi&quot;)
+<span class="hljs-punctuation">````</span>

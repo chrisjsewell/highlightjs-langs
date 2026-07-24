@@ -1,0 +1,11 @@
+<span class="hljs-comment">% a comment line, not rendered</span>
+
+First block.
+
+<span class="hljs-meta">+++ {&quot;tag&quot;: &quot;value&quot;}</span>
+
+Second block.
+
+---
+
+After a thematic break.

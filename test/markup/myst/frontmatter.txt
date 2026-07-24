@@ -1,0 +1,11 @@
+---
+title: MyST Demo
+authors:
+  - name: Jane Doe
+kernelspec:
+  name: python3
+---
+
+# Introduction
+
+Body text.

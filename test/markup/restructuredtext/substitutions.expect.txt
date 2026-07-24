@@ -1,0 +1,4 @@
+The <span class="hljs-template-variable">|biohazard|</span> symbol and the <span class="hljs-template-variable">|RST|_</span> reference.
+
+<span class="hljs-punctuation">.. </span><span class="hljs-template-variable">|biohazard|</span> <span class="hljs-keyword">image</span><span class="hljs-punctuation">::</span><span class="hljs-string"> biohazard.png</span>
+<span class="hljs-punctuation">.. </span><span class="hljs-template-variable">|RST|</span> <span class="hljs-keyword">replace</span><span class="hljs-punctuation">::</span><span class="hljs-string"> reStructuredText</span>

@@ -1,0 +1,15 @@
+.. note::
+   A note body.
+
+.. figure:: larch.png
+   :scale: 50
+   :alt: A larch tree
+
+   The caption of the figure.
+
+.. code-block:: python
+   :linenos:
+   :emphasize-lines: 2
+
+   def greet(name):
+       return f"Hi {name}"
