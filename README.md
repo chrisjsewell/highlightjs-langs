@@ -24,8 +24,8 @@ Load highlight.js core first, then one or both self-registering language bundles
 The `*.min.js` bundles register themselves on the global `hljs` — no extra wiring needed.
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@11/styles/github-dark.min.css">
-<script src="https://cdn.jsdelivr.net/npm/highlight.js@11/highlight.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11/styles/github-dark.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11/highlight.min.js"></script>
 
 <!-- Each bundle self-registers on the global `hljs`; load them AFTER highlight.js. -->
 <script src="https://cdn.jsdelivr.net/npm/highlightjs-langs/dist/restructuredtext.min.js"></script>
