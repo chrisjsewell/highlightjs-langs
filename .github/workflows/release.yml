@@ -14,9 +14,15 @@
 #
 # AFTER the package exists, switch to trusted publishing:
 #   1. On npmjs.com open the package's Settings -> Trusted Publisher -> GitHub Actions
-#      and register:  user `chrisjsewell`, repo `highlightjs-langs`, workflow `release.yml`.
+#      and register:  user `chrisjsewell`, repo `highlightjs-langs`, workflow `release.yml`,
+#      environment `npm`.
 #   2. Delete the `NPM_TOKEN` repository secret.
 # From then on releases publish via OIDC with zero long-lived credentials.
+#
+# The publish job runs in the `npm` GitHub Environment (Settings -> Environments).
+# Its protection rules (required reviewer) hold every release until approved in
+# the Actions UI, and the environment name is part of the OIDC trusted-publisher
+# binding — the environment here, in repo settings, and on npmjs.com must match.
 
 name: Release
 
@@ -32,6 +38,9 @@ permissions:
 jobs:
   publish:
     runs-on: ubuntu-latest
+    environment:
+      name: npm
+      url: https://www.npmjs.com/package/highlightjs-langs
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-node@v7
