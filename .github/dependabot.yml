@@ -7,6 +7,11 @@ updates:
       interval: weekly
     commit-message:
       prefix: "⬆️"
+    # Supply-chain guard: wait out a release's first week before proposing
+    # it, so compromised versions are usually yanked before we ever pull
+    # them. Dependabot *security* updates are not delayed by cooldown.
+    cooldown:
+      default-days: 7
     ignore:
       # TypeScript 7 is the native (Go) compiler and drops the JS compiler
       # API that tsup's declaration bundling needs — majors stay ignored
@@ -24,6 +29,8 @@ updates:
       interval: weekly
     commit-message:
       prefix: "⬆️"
+    cooldown:
+      default-days: 7
     groups:
       github-actions:
         patterns:
