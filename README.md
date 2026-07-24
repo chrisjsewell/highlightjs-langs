@@ -41,6 +41,10 @@ needed.
 
 ## Usage — Node / bundlers
 
+Requires `highlight.js` **≥ 11.3** (the grammars use the `hljs.regex` helpers introduced there;
+on older 11.x, highlight.js silently swallows the registration error and the languages never
+appear).
+
 ESM — register everything at once:
 
 ```js
@@ -172,6 +176,8 @@ carefully, and never regenerate blindly.
 
 ### Regex safety
 
+Stated policy, enforced in CI: **no lookbehind** (highlight.js' Safari rule) and **no unbounded
+quantifier followed by a required token** — name-like quantifiers are length- or segment-bounded.
 Grammar regexes are the attack surface of a highlighter, so they are tested three ways:
 
 - [`test/regex-safety.test.ts`](test/regex-safety.test.ts) runs
