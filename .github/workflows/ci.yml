@@ -30,6 +30,13 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run typecheck
+      # This package ships zero runtime dependencies; auditing only the
+      # production tree keeps that invariant enforced (any dependency that
+      # ever gets added arrives pre-audited) without failing CI on
+      # devDependency advisories that never reach the published artifact —
+      # those are covered by Dependabot alerts instead.
+      - name: Audit production dependencies
+        run: npm audit --omit=dev
 
   test:
     runs-on: ubuntu-latest
