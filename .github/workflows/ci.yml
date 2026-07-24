@@ -52,3 +52,18 @@ jobs:
         run: |
           test -f dist/restructuredtext.min.js
           test -f dist/myst.min.js
+
+  # https://github.com/marketplace/actions/alls-green#why
+  # Aggregate job for branch-protection rules: require only "check" instead of
+  # enumerating every job (matrix changes then never break the rules). The
+  # `if: always()` is load-bearing — without it a failed dependency would skip
+  # this job, and branch protection treats a skipped check as passing.
+  check:
+    if: always()
+    needs: [lint, typecheck, test]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Decide whether the needed jobs succeeded or failed
+        uses: re-actors/alls-green@release/v1
+        with:
+          jobs: ${{ toJSON(needs) }}
