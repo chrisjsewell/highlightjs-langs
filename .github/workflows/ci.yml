@@ -1,0 +1,54 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      # prek-action runs `prek run --all-files` with caching by default.
+      - uses: j178/prek-action@v2
+
+  typecheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [22, 24]
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: npm
+      - run: npm ci
+      - run: npm test
+      - run: npm run build
+      - name: Dist smoke-check
+        run: |
+          node -e "const assert=require('node:assert');const hljs=require('highlight.js');const {registerLanguages}=require('./dist/index.cjs');registerLanguages(hljs);assert(hljs.highlight('.. note:: x',{language:'rst'}).value.includes('hljs-'));assert(hljs.highlight('# t',{language:'myst'}).value.includes('hljs-'));console.log('dist smoke ok')"
+      - name: Assert browser bundles exist
+        run: |
+          test -f dist/restructuredtext.min.js
+          test -f dist/myst.min.js

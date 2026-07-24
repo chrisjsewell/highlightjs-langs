@@ -1,0 +1,20 @@
+version: 2
+updates:
+  # Weekly npm updates, grouped into a single pull request.
+  - package-ecosystem: npm
+    directory: "/"
+    schedule:
+      interval: weekly
+    groups:
+      npm-dependencies:
+        patterns:
+          - "*"
+  # Weekly GitHub Actions updates, grouped into a single pull request.
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: weekly
+    groups:
+      github-actions:
+        patterns:
+          - "*"
