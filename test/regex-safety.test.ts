@@ -12,7 +12,7 @@ import type { HLJSApi, Language, Mode } from "highlight.js";
 import hljs from "highlight.js";
 import { check } from "recheck";
 import { describe, expect, it } from "vitest";
-import cypher from "../src/languages/cypher";
+import cypher, { KEYWORDS as CYPHER_KEYWORDS } from "../src/languages/cypher";
 import myst from "../src/languages/myst";
 import restructuredtext from "../src/languages/restructuredtext";
 
@@ -57,7 +57,9 @@ function collectRegexes(language: Language): Map<string, string> {
     }
     const illegal = mode.illegal;
     if (Array.isArray(illegal)) {
-      illegal.forEach((part, i) => add(part, `${path}.illegal[${i}]`));
+      for (const [i, part] of illegal.entries()) {
+        add(part, `${path}.illegal[${i}]`);
+      }
     } else {
       add(illegal, `${path}.illegal`);
     }
@@ -66,10 +68,12 @@ function collectRegexes(language: Language): Map<string, string> {
       add(keywords.$pattern as RegexLike, `${path}.$pattern`);
     }
 
-    (mode.contains ?? []).forEach((child, i) => visit(child, `${path}>${i}`));
-    (mode.variants ?? []).forEach((variant, i) =>
-      visit(variant, `${path}~${i}`),
-    );
+    for (const [i, child] of (mode.contains ?? []).entries()) {
+      visit(child, `${path}>${i}`);
+    }
+    for (const [i, variant] of (mode.variants ?? []).entries()) {
+      visit(variant, `${path}~${i}`);
+    }
     if (mode.starts) {
       visit(mode.starts, `${path}.starts`);
     }
@@ -118,6 +122,19 @@ const ALLOWLIST = new Map<string, string>([
   [
     "^\\[[^\\n]{1,400}\\]:",
     "anchored per line and bounded; measured linear — see api.test.ts",
+  ],
+  [
+    "\\b[A-Za-z0-9]\\w{0,60}(?:[.+-]\\w{1,60}){0,15}__?(?=[\\s.,;:!?)\\]\"']|$)",
+    "segment- and length-bounded (≤16 backtrack points per position); " +
+      "measured linear, 200 KB kebab pumps in <30 ms — see the 'kebab " +
+      "segment flood' timing case in api.test.ts",
+  ],
+  [
+    `(\\b(?!(?:${CYPHER_KEYWORDS.join("|")})\\()[A-Za-z_]\\w{0,60}(?:\\.\\w{1,60}){0,6})(\\()`,
+    "zero-width keyword lookahead over a fixed alternation plus bounded " +
+      "segments — constant work per position; measured linear to 800 KB " +
+      "(cost is span emission) — see the 'keyword paren flood' timing case " +
+      "in api.test.ts",
   ],
 ]);
 

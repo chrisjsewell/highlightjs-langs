@@ -266,7 +266,7 @@ export default function restructuredtext(hljs: HLJSApi): Language {
   const STANDALONE_REF: Mode = {
     scope: "symbol",
     match:
-      /\b[A-Za-z0-9]\w{0,60}(?:[.+-]\w{1,60}){0,6}__?(?=[\s.,;:!?)\]"']|$)/,
+      /\b[A-Za-z0-9]\w{0,60}(?:[.+-]\w{1,60}){0,15}__?(?=[\s.,;:!?)\]"']|$)/,
     relevance: 0,
   };
 

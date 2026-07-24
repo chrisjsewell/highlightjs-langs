@@ -3,8 +3,8 @@
 [![CI](https://github.com/chrisjsewell/highlightjs-langs/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/chrisjsewell/highlightjs-langs/actions/workflows/ci.yml)
 [![npm version](https://img.shields.io/npm/v/highlightjs-langs.svg)](https://www.npmjs.com/package/highlightjs-langs)
 
-[highlight.js](https://highlightjs.org) grammars for **reStructuredText** and **MyST Markdown**,
-distributed as a single npm package with per-language builds.
+[highlight.js](https://highlightjs.org) grammars for **reStructuredText**, **MyST Markdown** and
+**Cypher**, distributed as a single npm package with per-language builds.
 
 These are third-party grammars: highlight.js keeps everything except a core set of languages
 outside the main library, and leaves them to be published separately. See the
@@ -21,8 +21,9 @@ for where third-party grammars live in the ecosystem.
 
 ## Usage — browser / CDN
 
-Load highlight.js core first, then one or both self-registering language bundles, then highlight.
-The `*.min.js` bundles register themselves on the global `hljs` — no extra wiring needed.
+Load highlight.js core first, then whichever self-registering language bundles you need, then
+highlight. The `*.min.js` bundles register themselves on the global `hljs` — no extra wiring
+needed.
 
 ```html
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11/styles/github-dark.min.css">
@@ -31,6 +32,7 @@ The `*.min.js` bundles register themselves on the global `hljs` — no extra wir
 <!-- Each bundle self-registers on the global `hljs`; load them AFTER highlight.js. -->
 <script src="https://cdn.jsdelivr.net/npm/highlightjs-langs/dist/restructuredtext.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/highlightjs-langs/dist/myst.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/highlightjs-langs/dist/cypher.min.js"></script>
 
 <script>
   hljs.highlightAll();
@@ -122,6 +124,11 @@ Being upfront about what these grammars deliberately do *not* do:
 - Info-string languages on fenced code blocks are not sub-highlighted.
 - MyST fence pairing is positional; the "the closing fence must be at least as long as the opening
   fence" rule is not enforced.
+- Cypher map keys that collide with keywords (`{create: 1}`) highlight as keywords; dotted access
+  (`n.match`) is protected. Variables named `start`/`end` also take the keyword colour.
+- Extremely long names are length-bounded as ReDoS protection (reStructuredText targets ≈200
+  chars, reference names ≈15 segments, MyST link-reference labels ≈400 chars, Cypher call names
+  ≈7 segments); longer ones fall back to plain text.
 
 ## Looking for other languages?
 

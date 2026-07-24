@@ -72,6 +72,9 @@ describe("pathological inputs complete quickly", () => {
     "block comment spaces": `/* ${" ".repeat(80_000)}`,
     "target def spaces": `.. ${" ".repeat(80_000)}x`,
     "bracket line flood": `[${"a".repeat(200)}]x\n`.repeat(400),
+    "kebab segment flood": "a-".repeat(40_000),
+    "keyword paren flood": "match(".repeat(15_000),
+    "dotted call flood": "a.a(".repeat(20_000),
   };
 
   for (const [name, input] of Object.entries(inputs)) {

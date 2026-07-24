@@ -1,6 +1,6 @@
 import { defineConfig } from "tsup";
 
-const banner = `/*! highlightjs-langs | reStructuredText & MyST grammars for highlight.js | MIT | https://github.com/chrisjsewell/highlightjs-langs */`;
+const banner = `/*! highlightjs-langs | reStructuredText, MyST & Cypher grammars for highlight.js | MIT | https://github.com/chrisjsewell/highlightjs-langs */`;
 
 export default defineConfig([
   // Library builds (ESM + CJS + type declarations).
