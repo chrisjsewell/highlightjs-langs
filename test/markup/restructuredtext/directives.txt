@@ -13,3 +13,5 @@
 
    def greet(name):
        return f"Hi {name}"
+
+.. note :: A spaced directive marker is also valid.

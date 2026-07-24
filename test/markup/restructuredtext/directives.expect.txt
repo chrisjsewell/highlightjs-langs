@@ -13,3 +13,5 @@
 
    def greet(name):
        return f&quot;Hi {name}&quot;
+
+<span class="hljs-punctuation">.. </span><span class="hljs-keyword">note</span> <span class="hljs-punctuation">::</span><span class="hljs-string"> A spaced directive marker is also valid.</span>

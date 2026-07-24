@@ -1,0 +1,19 @@
+<span class="hljs-punctuation">````</span><span class="hljs-punctuation">{</span><span class="hljs-keyword">note</span><span class="hljs-punctuation">}</span>
+Body before a thematic break.
+
+---
+
+Body after it, then a bare inner fence:
+
+<span class="hljs-code">```
+print(&quot;hi&quot;)
+```</span>
+<span class="hljs-punctuation">````</span>
+
+After the tick directive.
+
+<span class="hljs-punctuation">:::</span><span class="hljs-punctuation">{</span><span class="hljs-keyword">note</span><span class="hljs-punctuation">}</span>
+<span class="hljs-code">    an indented code line</span>
+<span class="hljs-punctuation">:::</span>
+
+After the colon directive.

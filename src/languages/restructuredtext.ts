@@ -22,6 +22,10 @@ import type { HLJSApi, Language, Mode } from "highlight.js";
  * - Postfix roles (`text`:role:) are not recognised.
  * - A section adornment may be any run of the same punctuation character; we
  *   accept mixed punctuation runs to avoid backreferences.
+ * - Inline-markup word-adjacency rules are not enforced (docutils would not
+ *   emphasise `2*3*4`; this grammar does, like the Pygments RST lexer).
+ * - Doctest `...` continuation prompts are not highlighted (a prose line
+ *   starting with an ellipsis is far more common).
  */
 export default function restructuredtext(hljs: HLJSApi): Language {
   // Any ASCII punctuation, the character set allowed for section adornments.
@@ -34,13 +38,14 @@ export default function restructuredtext(hljs: HLJSApi): Language {
       /\|[^|\n]+\|/,
       /[ \t]+/,
       /[\w.+-]+(?::[\w.+-]+)*/,
+      / ?/,
       /::/,
     ],
     beginScope: {
       1: "punctuation",
       2: "template-variable",
       4: "keyword",
-      5: "punctuation",
+      6: "punctuation",
     },
     starts: {
       end: /$/,
@@ -49,9 +54,10 @@ export default function restructuredtext(hljs: HLJSApi): Language {
     relevance: 5,
   };
 
-  // `.. [1]`, `.. [#label]`, `.. [*]`, `.. [citation]`
+  // `.. [1]`, `.. [#label]`, `.. [*]`, `.. [citation]` — labels are docutils
+  // simplenames, length-bounded to keep failed matches on "[" floods cheap.
   const FOOTNOTE_DEF: Mode = {
-    begin: [/^[ \t]*\.\.[ \t]+/, /\[(?:\d+|#[\w.+-]*|\*|[^\]\s]+)\]/],
+    begin: [/^[ \t]*\.\.[ \t]+/, /\[(?:\d+|#[\w.+-]{0,60}|\*|[\w.+-]{1,60})\]/],
     beginScope: { 1: "punctuation", 2: "symbol" },
     relevance: 2,
   };
@@ -72,10 +78,10 @@ export default function restructuredtext(hljs: HLJSApi): Language {
     relevance: 2,
   };
 
-  // `.. directive-name:: arguments`
+  // `.. directive-name:: arguments` (docutils allows one space before `::`)
   const DIRECTIVE: Mode = {
-    begin: [/^[ \t]*\.\.[ \t]+/, /[\w.+-]+(?::[\w.+-]+)*/, /::/],
-    beginScope: { 1: "punctuation", 2: "keyword", 3: "punctuation" },
+    begin: [/^[ \t]*\.\.[ \t]+/, /[\w.+-]+(?::[\w.+-]+)*/, / ?/, /::/],
+    beginScope: { 1: "punctuation", 2: "keyword", 4: "punctuation" },
     starts: {
       end: /$/,
       contains: [{ scope: "string", match: /[^\n]+/ }],
@@ -119,14 +125,16 @@ export default function restructuredtext(hljs: HLJSApi): Language {
     relevance: 0,
   };
 
-  // `>>> code` / `... code` doctest lines, highlighted as Python.
+  // `>>> code` doctest lines, highlighted as Python. `...` continuation
+  // prompts are deliberately not matched: a prose line starting "... " is far
+  // more common in documents than a bare continuation line.
   const DOCTEST: Mode = {
     scope: "meta.prompt",
+    begin: /^>{3}(?=[ \t])/,
     starts: {
       end: /$/,
       subLanguage: "python",
     },
-    variants: [{ begin: /^>{3}(?=[ \t])/ }, { begin: /^\.{3}(?=[ \t])/ }],
     relevance: 2,
   };
 
@@ -212,10 +220,12 @@ export default function restructuredtext(hljs: HLJSApi): Language {
     relevance: 0,
   };
 
-  // `:role:` or `:domain:role:` immediately before interpreted text.
+  // `:role:` or `:domain:role:` immediately before interpreted text. At most
+  // three colon-separated segments — an unbounded repetition backtracks
+  // quadratically on ":a:a:a…" floods.
   const ROLE: Mode = {
     scope: "keyword",
-    match: /:[\w+.-]+(?::[\w+.-]+)*:(?=`)/,
+    match: /:[\w+.-]+(?::[\w+.-]+){0,2}:(?=`)/,
     relevance: 2,
   };
 
@@ -246,14 +256,15 @@ export default function restructuredtext(hljs: HLJSApi): Language {
   // [1]_, [#]_, [*]_, [citation]_ references.
   const FOOTNOTE_REF: Mode = {
     scope: "symbol",
-    match: /\[(?:\d+|#[\w.+-]*|\*|[^\]\s]+)\]_/,
+    match: /\[(?:\d+|#[\w.+-]{0,60}|\*|[\w.+-]{1,60})\]_/,
     relevance: 1,
   };
 
-  // Standalone references: name_, name__
+  // Standalone references: name_, name__ (length-bounded: an unbounded tail
+  // backtracks quadratically on "a.a.a…" floods).
   const STANDALONE_REF: Mode = {
     scope: "symbol",
-    match: /\b[A-Za-z0-9][\w.+-]*__?(?=[\s.,;:!?)\]"']|$)/,
+    match: /\b[A-Za-z0-9][\w.+-]{0,60}__?(?=[\s.,;:!?)\]"']|$)/,
     relevance: 0,
   };
 

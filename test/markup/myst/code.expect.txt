@@ -14,8 +14,8 @@ def g(y):
 <span class="hljs-punctuation">```</span>
 
 <span class="hljs-punctuation">````</span><span class="hljs-punctuation">{</span><span class="hljs-keyword">code-cell</span><span class="hljs-punctuation">}</span><span class="hljs-string"> python</span>
-<span class="hljs-meta">---</span><span class="language-yaml">
-<span class="hljs-attr">tags:</span> [<span class="hljs-string">hide-input</span>]
+<span class="hljs-meta">---</span>
+<span class="language-yaml"><span class="hljs-attr">tags:</span> [<span class="hljs-string">hide-input</span>]
 </span><span class="hljs-meta">---</span>
 print(&quot;hi&quot;)
 <span class="hljs-punctuation">````</span>

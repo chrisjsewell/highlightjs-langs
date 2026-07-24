@@ -16,3 +16,6 @@ hello
 
 | Verse line one
 | Verse line two
+
+A wrapped paragraph
+... continuing with an ellipsis, which is prose, not a doctest.

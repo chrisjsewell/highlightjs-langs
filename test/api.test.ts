@@ -50,6 +50,11 @@ describe("pathological inputs complete quickly", () => {
     "directive spam": "```{note}\n".repeat(500),
     "adornment spam": "===\n".repeat(2_000),
     "long single line": `text ${"=".repeat(50_000)} text`,
+    "role colon flood": ":a".repeat(50_000),
+    "citation bracket flood": "[a".repeat(50_000),
+    "dotted name flood": "a.".repeat(50_000),
+    "footnote caret flood": "[^a".repeat(33_000),
+    "unclosed link flood": "[a](b".repeat(2_000),
   };
 
   for (const [name, input] of Object.entries(inputs)) {

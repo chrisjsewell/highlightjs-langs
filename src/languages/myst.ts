@@ -25,7 +25,10 @@ import type { HLJSApi, Language, Mode } from "highlight.js";
  * - Fenced-code and `{code-*}` directive bodies are not sub-highlighted: the
  *   embedded language is only known dynamically from the fence info string.
  * - Fence pairing is positional (innermost-first); the MyST rule that an outer
- *   fence must be strictly longer than inner fences is not enforced.
+ *   fence must be strictly longer than inner fences is not enforced, except
+ *   that bare inner fences pair only at exactly three characters.
+ * - Inline-markup word-adjacency rules are not enforced (`a**b**c` bolds, as
+ *   in the core markdown grammar).
  */
 export default function myst(hljs: HLJSApi): Language {
   const DIRECTIVE_NAME = /[\w:+.-]+/;
@@ -92,19 +95,41 @@ export default function myst(hljs: HLJSApi): Language {
     relevance: 0,
   };
   const URL_SCHEME = /[A-Za-z][A-Za-z0-9+.-]*/;
+  // Deviation from core markdown: labels and destinations use bounded,
+  // bracket-free character classes instead of `.+?`/`.*?`. The generic core
+  // variants backtrack catastrophically on unclosed-link floods such as
+  // "[a](b" repeated (cubic — seconds of work from a 10 KB input).
+  const LINK_LABEL = /\[[^[\]\n]{0,399}\]/;
   const LINK: Mode = {
     variants: [
-      { begin: /\[.+?\]\[.*?\]/, relevance: 0 },
       {
-        begin: /\[.+?\]\(((data|javascript|mailto):|(?:http|ftp)s?:\/\/).*?\)/,
+        begin: hljs.regex.concat(LINK_LABEL, /\[[^[\]\n]{0,399}\]/),
+        relevance: 0,
+      },
+      {
+        begin: hljs.regex.concat(
+          LINK_LABEL,
+          /\(((data|javascript|mailto):|(?:http|ftp)s?:\/\/)[^()\n]{0,399}\)/,
+        ),
         relevance: 2,
       },
       {
-        begin: hljs.regex.concat(/\[.+?\]\(/, URL_SCHEME, /:\/\/.*?\)/),
+        begin: hljs.regex.concat(
+          LINK_LABEL,
+          /\(/,
+          URL_SCHEME,
+          /:\/\/[^()\n]{0,399}\)/,
+        ),
         relevance: 2,
       },
-      { begin: /\[.+?\]\([./?&#].*?\)/, relevance: 1 },
-      { begin: /\[.*?\]\(.*?\)/, relevance: 0 },
+      {
+        begin: hljs.regex.concat(LINK_LABEL, /\([./?&#][^()\n]{0,399}\)/),
+        relevance: 1,
+      },
+      {
+        begin: hljs.regex.concat(LINK_LABEL, /\([^()\n]{0,399}\)/),
+        relevance: 0,
+      },
     ],
     returnBegin: true,
     contains: [
@@ -187,15 +212,16 @@ export default function myst(hljs: HLJSApi): Language {
     relevance: 0,
   };
 
-  // [^label] footnote reference / definition.
+  // [^label] footnote reference / definition. Labels are word characters and
+  // hyphens, length-bounded so that failed matches on "[^" floods stay cheap.
   const FOOTNOTE_REF: Mode = {
     scope: "symbol",
-    match: /\[\^[^\]\n]+\]/,
+    match: /\[\^[\w-]{1,60}\]/,
     relevance: 0,
   };
   const FOOTNOTE_DEF: Mode = {
     scope: "symbol",
-    match: /^\[\^[^\]\n]+\]:/,
+    match: /^\[\^[\w-]{1,60}\]:/,
   };
 
   const CONTAINABLE: Mode[] = [
@@ -272,13 +298,17 @@ export default function myst(hljs: HLJSApi): Language {
     relevance: 0,
   };
 
-  // `--- yaml ---` option block at the top of a directive body.
+  // `--- yaml ---` option block at the top of a directive body. The next line
+  // must look like a YAML key so a mid-body thematic break stays a thematic
+  // break, and endsWithParent guarantees the region can never outlive the
+  // directive (it would otherwise swallow the closing fence and beyond).
   const DIRECTIVE_YAML_OPTIONS: Mode = {
-    begin: /^[ \t]*---[ \t]*$/,
+    begin: [/^[ \t]*---[ \t]*/, /\n/, /(?=[ \t]*[\w"'-][^\n]*:)/],
+    beginScope: { 1: "meta" },
     end: /^[ \t]*---[ \t]*$/,
-    beginScope: "meta",
     endScope: "meta",
     subLanguage: "yaml",
+    endsWithParent: true,
   };
 
   // Helper producing the three fence flavours (```, ~~~, :::) of a directive.
@@ -379,13 +409,15 @@ export default function myst(hljs: HLJSApi): Language {
     variants: [
       { begin: "(`{3,})[^`\\n](.|\\n)*?\\1`*[ ]*" },
       { begin: "(~{3,})[^~\\n](.|\\n)*?\\1~*[ ]*" },
+      // A bare exactly-3 fence pair (no info string). A longer parent closer
+      // can never match this: its fourth fence character fails the (?!`).
+      { begin: "`{3}(?!`)[ \\t]*\\n(.|\\n)*?\\n`{3}(?!`)[ \\t]*(?=\\n|$)" },
+      { begin: "~{3}(?!~)[ \\t]*\\n(.|\\n)*?\\n~{3}(?!~)[ \\t]*(?=\\n|$)" },
       // inline spans must not match a bare ``` fence line (`.` matches `!)
       { begin: "``[^`\\n]+``|`[^`\\n]+`" },
-      {
-        begin: "(?=^( {4}|\\t))",
-        contains: [{ begin: "^( {4}|\\t)", end: "(\\n)$" }],
-        relevance: 0,
-      },
+      // indented code, one line at a time so it can never run across the
+      // parent directive's closing fence
+      { begin: "^( {4}|\\t)", end: "$", relevance: 0 },
     ],
     relevance: 0,
   };

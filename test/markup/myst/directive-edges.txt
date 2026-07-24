@@ -1,0 +1,19 @@
+````{note}
+Body before a thematic break.
+
+---
+
+Body after it, then a bare inner fence:
+
+```
+print("hi")
+```
+````
+
+After the tick directive.
+
+:::{note}
+    an indented code line
+:::
+
+After the colon directive.

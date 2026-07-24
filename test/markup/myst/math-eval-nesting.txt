@@ -1,0 +1,13 @@
+```{math}
+e^{i\pi} + 1 = 0
+```
+
+:::{eval-rst}
+.. note:: Colon-flavour eval-rst content.
+:::
+
+`````{admonition} Outer tick
+````{note}
+Inner tick directive.
+````
+`````
