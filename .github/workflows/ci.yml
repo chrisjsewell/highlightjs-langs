@@ -60,6 +60,46 @@ jobs:
           test -f dist/restructuredtext.min.js
           test -f dist/myst.min.js
 
+  # Registers the built grammars against the oldest highlight.js the
+  # peerDependencies range claims to support. hljs.regex (used by the rst and
+  # myst grammars) only exists from 11.3.0, and highlight.js SWALLOWS grammar
+  # registration errors — on an unsupported version consumers silently get no
+  # highlighting, so only an explicit floor check catches a drifted range.
+  peer-floor:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run build
+      - name: Extract declared peer floor
+        id: floor
+        run: |
+          node -e "
+          const range = require('./package.json').peerDependencies['highlight.js'];
+          const m = range.match(/^\^(\d+\.\d+\.\d+)$/);
+          if (!m) { console.error('unexpected peer range: ' + range); process.exit(1); }
+          require('node:fs').appendFileSync(process.env.GITHUB_OUTPUT, 'version=' + m[1] + '\n');
+          "
+      - name: Install the peer floor
+        run: npm install --no-save highlight.js@${{ steps.floor.outputs.version }}
+      - name: Register and highlight on the floor version
+        run: |
+          node -e "
+          const assert = require('node:assert');
+          const hljs = require('highlight.js');
+          const { registerLanguages } = require('./dist/index.cjs');
+          registerLanguages(hljs);
+          for (const [lang, sample] of [['rst', '.. note:: x'], ['myst', '(t)='], ['cypher', 'MATCH (n:X)']]) {
+            assert(hljs.getLanguage(lang), lang + ' failed to register');
+            assert(hljs.highlight(sample, { language: lang }).value.includes('hljs-'), lang + ' emitted no spans');
+          }
+          console.log('all grammars work on highlight.js@' + hljs.versionString);
+          "
+
   # https://github.com/marketplace/actions/alls-green#why
   # Aggregate job for branch-protection rules: require only "check" instead of
   # enumerating every job (matrix changes then never break the rules). The
@@ -67,7 +107,7 @@ jobs:
   # this job, and branch protection treats a skipped check as passing.
   check:
     if: always()
-    needs: [lint, typecheck, test]
+    needs: [lint, typecheck, test, peer-floor]
     runs-on: ubuntu-latest
     steps:
       - name: Decide whether the needed jobs succeeded or failed
