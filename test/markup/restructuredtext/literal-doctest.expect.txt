@@ -1,0 +1,21 @@
+A literal block follows<span class="hljs-punctuation">::</span><span class="hljs-code">
+
+    raw = &quot;verbatim *text*&quot;
+    print(raw)
+
+</span>Or the expanded form:
+
+<span class="hljs-punctuation">::</span><span class="hljs-code">
+
+    also literal
+
+</span><span class="hljs-meta prompt_">&gt;&gt;&gt;</span><span class="language-python"> <span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;hello&quot;</span>)</span>
+hello
+<span class="hljs-meta prompt_">&gt;&gt;&gt;</span><span class="language-python"> <span class="hljs-number">1</span> + <span class="hljs-number">1</span></span>
+2
+
+<span class="hljs-punctuation">|</span> Verse line one
+<span class="hljs-punctuation">|</span> Verse line two
+
+A wrapped paragraph
+... continuing with an ellipsis, which is prose, not a doctest.

@@ -1,0 +1,5 @@
+<span class="hljs-punctuation">(</span><span class="hljs-symbol">intro</span><span class="hljs-punctuation">)=</span>
+<span class="hljs-section"># Introduction</span>
+
+See [<span class="hljs-string">the intro</span>](<span class="hljs-link">#intro</span>) or <span class="hljs-punctuation">{</span><span class="hljs-keyword">ref</span><span class="hljs-punctuation">}</span><span class="hljs-code">`intro`</span>, water H<span class="hljs-punctuation">{</span><span class="hljs-keyword">sub</span><span class="hljs-punctuation">}</span><span class="hljs-code">`2`</span>O,
+inline math <span class="hljs-punctuation">{</span><span class="hljs-keyword">math</span><span class="hljs-punctuation">}</span><span class="hljs-code">`a^2+b^2=c^2`</span> and <span class="hljs-punctuation">{</span><span class="hljs-keyword">py:func</span><span class="hljs-punctuation">}</span><span class="hljs-code">`os.getcwd`</span>.

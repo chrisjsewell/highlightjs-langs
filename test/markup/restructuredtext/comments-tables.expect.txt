@@ -1,0 +1,18 @@
+<span class="hljs-comment">..</span><span class="hljs-comment"> This whole indented block
+   is a comment continuation.
+
+</span><span class="hljs-comment">..</span>
+
+   Not swallowed by the empty comment.
+
+<span class="hljs-punctuation">+------------+------------+</span>
+<span class="hljs-punctuation">|</span> Header 1   <span class="hljs-punctuation">|</span> Header 2   <span class="hljs-punctuation">|</span>
+<span class="hljs-punctuation">+============+============+</span>
+<span class="hljs-punctuation">|</span> body 1     <span class="hljs-punctuation">|</span> body 2     <span class="hljs-punctuation">|</span>
+<span class="hljs-punctuation">+------------+------------+</span>
+
+<span class="hljs-punctuation">=====  =====  ======</span>
+  A      B    A or B
+<span class="hljs-punctuation">=====  =====  ======</span>
+False  False  False
+<span class="hljs-punctuation">=====  =====  ======</span>

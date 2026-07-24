@@ -1,0 +1,5 @@
+Here is a footnote reference.[^first] And another.[^long-note]
+
+[^first]: The first footnote.
+[^long-note]: Multi-paragraph footnotes indent
+    their continuation lines.

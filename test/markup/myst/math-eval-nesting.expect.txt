@@ -1,0 +1,13 @@
+<span class="hljs-punctuation">```</span><span class="hljs-punctuation">{</span><span class="hljs-keyword">math</span><span class="hljs-punctuation">}</span><span class="language-latex">
+e<span class="hljs-built_in">^</span>{i<span class="hljs-keyword">\pi</span>} + 1 = 0
+</span><span class="hljs-punctuation">```</span>
+
+<span class="hljs-punctuation">:::</span><span class="hljs-punctuation">{</span><span class="hljs-keyword">eval-rst</span><span class="hljs-punctuation">}</span><span class="language-restructuredtext">
+<span class="hljs-punctuation">.. </span><span class="hljs-keyword">note</span><span class="hljs-punctuation">::</span><span class="hljs-string"> Colon-flavour eval-rst content.</span>
+</span><span class="hljs-punctuation">:::</span>
+
+<span class="hljs-punctuation">`````</span><span class="hljs-punctuation">{</span><span class="hljs-keyword">admonition</span><span class="hljs-punctuation">}</span><span class="hljs-string"> Outer tick</span>
+<span class="hljs-punctuation">````</span><span class="hljs-punctuation">{</span><span class="hljs-keyword">note</span><span class="hljs-punctuation">}</span>
+Inner tick directive.
+<span class="hljs-punctuation">````</span>
+<span class="hljs-punctuation">`````</span>

@@ -1,0 +1,6 @@
+Inline markup: <span class="hljs-emphasis">*emphasis*</span>, <span class="hljs-strong">**strong**</span>, and <span class="hljs-code">``inline literal``</span>.
+
+Press <span class="hljs-keyword">:kbd:</span><span class="hljs-string">`Ctrl+C`</span>, see <span class="hljs-keyword">:math:</span><span class="hljs-string">`a^2 + b^2 = c^2`</span>, call
+<span class="hljs-keyword">:py:func:</span><span class="hljs-string">`os.getcwd`</span>, and reference the <span class="hljs-string">`default role`</span>.
+
+Escaped: <span class="hljs-char escape_">\*</span>not emphasis<span class="hljs-char escape_">\*</span> and a <span class="hljs-char escape_">\|</span> literal pipe.

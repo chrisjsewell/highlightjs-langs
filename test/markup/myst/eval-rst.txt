@@ -1,0 +1,6 @@
+```{eval-rst}
+.. note::
+   Real reStructuredText in here.
+
+See :py:func:`os.getcwd` and ``literals``.
+```

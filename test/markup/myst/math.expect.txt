@@ -1,0 +1,10 @@
+Inline <span class="hljs-formula">$e^{i\pi}+1=0$</span> in prose.
+
+<span class="hljs-formula">$$
+\int_0^1 x^2 \, dx = \tfrac{1}{3}
+$$</span> <span class="hljs-symbol">(eq-int)</span>
+
+<span class="hljs-formula">\begin{align}
+a &amp;= b + c \\
+  &amp;= d
+\end{align}</span>

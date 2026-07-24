@@ -1,0 +1,103 @@
+<!-- Run `npm run build` first; this page loads the built dist/ bundles. -->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>highlightjs-langs demo</title>
+
+    <!-- highlight.js core + a theme, from jsDelivr. -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11/styles/github-dark.min.css"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/@highlightjs/cdn-assets@11/highlight.min.js"></script>
+
+    <!-- The language bundles self-register on the global `hljs`; load them AFTER core. -->
+    <script src="../dist/restructuredtext.min.js"></script>
+    <script src="../dist/myst.min.js"></script>
+
+    <style>
+      body {
+        font-family: system-ui, sans-serif;
+        margin: 2rem;
+        background: #0d1117;
+        color: #c9d1d9;
+      }
+      h1 {
+        font-weight: 600;
+      }
+      .cols {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+      .cols > section {
+        flex: 1 1 360px;
+        min-width: 0;
+      }
+      h2 {
+        font-size: 1rem;
+        font-weight: 600;
+      }
+      pre {
+        margin: 0;
+        border-radius: 6px;
+        overflow: auto;
+      }
+      pre code.hljs {
+        padding: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>highlightjs-langs demo</h1>
+
+    <div class="cols">
+      <section>
+        <h2>reStructuredText</h2>
+        <pre><code class="language-rst">Example Section
+===============
+
+.. note::
+   :class: tip
+
+   See :py:func:`os.getcwd` for the current working directory.
+
+This is **strong** text with a ``literal`` and a label_ reference [1]_.
+
+.. _label: https://example.org
+
+.. [1] The footnote definition.
+</code></pre>
+      </section>
+
+      <section>
+        <h2>MyST Markdown</h2>
+        <pre><code class="language-myst">---
+title: Demo
+---
+
+(target)=
+# Heading
+
+% a comment
+
+```{note}
+:class: tip
+
+A directive with an option and $E = mc^2$ inline math.
+```
+
++++
+
+See {ref}`target` for details.
+</code></pre>
+      </section>
+    </div>
+
+    <script>
+      hljs.highlightAll();
+    </script>
+  </body>
+</html>

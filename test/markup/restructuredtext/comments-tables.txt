@@ -1,0 +1,18 @@
+.. This whole indented block
+   is a comment continuation.
+
+..
+
+   Not swallowed by the empty comment.
+
++------------+------------+
+| Header 1   | Header 2   |
++============+============+
+| body 1     | body 2     |
++------------+------------+
+
+=====  =====  ======
+  A      B    A or B
+=====  =====  ======
+False  False  False
+=====  =====  ======

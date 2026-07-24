@@ -1,0 +1,20 @@
+(section)=
+# Section
+
+% comment line
+
+```{note}
+A note with a {ref}`section` role and {py:func}`os.getcwd`.
+```
+
+:::{tip}
+Colon fences work too.
+:::
+
+Some **bold** text with inline math $x^2$.
+
++++
+
+$$
+e^{i\pi} + 1 = 0
+$$

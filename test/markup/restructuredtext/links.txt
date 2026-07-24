@@ -1,0 +1,11 @@
+See the Python_ site, a `phrase reference`_, an anonymous__ ref,
+an `embedded <https://example.org/embed>`_ link, and plain
+https://example.org/plain text.
+
+An _`inline target` sits here.
+
+.. _Python: https://www.python.org/
+.. _phrase reference:
+.. __: https://anonymous.example.com/
+
+__ https://example.com/short-anonymous

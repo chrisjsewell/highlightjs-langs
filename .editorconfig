@@ -1,0 +1,22 @@
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = space
+indent_size = 2
+
+# Markup and detect fixtures are byte-exact; never rewrite their whitespace.
+[test/markup/**]
+trim_trailing_whitespace = false
+insert_final_newline = false
+
+[test/detect/**]
+trim_trailing_whitespace = false
+insert_final_newline = false
+
+# Markdown uses trailing whitespace for hard line breaks.
+[*.md]
+trim_trailing_whitespace = false

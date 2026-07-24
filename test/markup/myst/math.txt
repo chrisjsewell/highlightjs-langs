@@ -1,0 +1,10 @@
+Inline $e^{i\pi}+1=0$ in prose.
+
+$$
+\int_0^1 x^2 \, dx = \tfrac{1}{3}
+$$ (eq-int)
+
+\begin{align}
+a &= b + c \\
+  &= d
+\end{align}
