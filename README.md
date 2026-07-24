@@ -169,14 +169,16 @@ fast pre-commit reimplementation; plain `pre-commit` works too, and CI runs the 
    ```
 
 The [Release workflow](.github/workflows/release.yml) runs on the tag, verifies the tag matches
-`package.json`, then builds and publishes to npm.
+`package.json`, then builds and publishes to npm. The publish job runs in the `npm` GitHub
+Environment, so it waits for approval in the Actions UI if the environment has required reviewers.
 
 **First-ever publish** must use an `NPM_TOKEN` secret: npm cannot pre-configure trusted publishing
-for a package that does not exist yet. Create a granular npm automation token, add it as the
-repository secret `NPM_TOKEN`, and push the first tag. **After** that, configure the Trusted
-Publisher on npmjs.com (package Settings → Trusted Publisher → GitHub Actions → user
-`chrisjsewell`, repo `highlightjs-langs`, workflow `release.yml`) and delete the secret; subsequent
-releases publish via OIDC with no long-lived credentials.
+for a package that does not exist yet. Create an npm token that can bypass 2FA (CI cannot answer a
+one-time-password prompt), add it as the repository secret `NPM_TOKEN`, and push the first tag.
+**After** that, configure the Trusted Publisher on npmjs.com (package Settings → Trusted Publisher
+→ GitHub Actions → user `chrisjsewell`, repo `highlightjs-langs`, workflow `release.yml`,
+environment `npm`) and delete the secret; subsequent releases publish via OIDC with no long-lived
+credentials.
 
 ## License
 
