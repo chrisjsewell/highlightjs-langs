@@ -54,6 +54,26 @@ The `*.expect.txt` files are the behavioural specification of each grammar. `npm
 (which sets `UPDATE_EXPECT=1`) regenerates them from current output. **Always review the resulting
 diff** — a change there is a change in grammar behaviour. Never regenerate blindly.
 
+## Commit and PR titles
+
+Start every commit-message summary and PR title with an emoji marking the change type — just
+the emoji, no `NEW:`-style keyword text (adapted from the
+[MyST-Parser convention](https://github.com/executablebooks/MyST-Parser/blob/master/AGENTS.md#commit-message-format)):
+
+| Emoji | Change type                              |
+| ----- | ---------------------------------------- |
+| ✨    | New feature                              |
+| 🐛    | Bug fix                                  |
+| 👌    | Improvement (no breaking changes)        |
+| ‼️    | Breaking change                          |
+| 📚    | Documentation                            |
+| 🔧    | Maintenance (tooling, config, typos)     |
+| 🧪    | Tests or CI changes only                 |
+| ♻️    | Refactoring                              |
+| ⬆️    | Dependency upgrade (Dependabot uses this) |
+
+Keep the summary at 72 characters or fewer, and add a body when the change needs context.
+
 ## Release process
 
 Bump `version` in `package.json`, commit, then tag and push `vX.Y.Z`. Pushing the tag triggers
