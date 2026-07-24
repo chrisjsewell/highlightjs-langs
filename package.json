@@ -1,7 +1,7 @@
 {
   "name": "highlightjs-langs",
-  "version": "0.2.0",
-  "description": "highlight.js language grammars for reStructuredText and MyST Markdown",
+  "version": "0.2.1",
+  "description": "highlight.js language grammars for reStructuredText, MyST Markdown and Cypher",
   "keywords": [
     "highlight.js",
     "highlightjs",
@@ -12,7 +12,9 @@
     "myst",
     "markdown",
     "sphinx",
-    "docutils"
+    "docutils",
+    "cypher",
+    "neo4j"
   ],
   "license": "MIT",
   "author": "Chris Sewell",
