@@ -75,7 +75,7 @@ export default function myst(hljs: HLJSApi): Language {
     relevance: 0,
   };
   const LINK_REFERENCE: Mode = {
-    begin: /^\[[^\n]+\]:/,
+    begin: /^\[[^\n]{1,400}\]:/,
     returnBegin: true,
     contains: [
       {

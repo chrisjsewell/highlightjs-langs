@@ -1,0 +1,3 @@
+RETURN 'single', "double \"escaped\"", `backtick id`, 3.14, 0x1F, 1e10,
+       true, FALSE, null, [1, 2, 3], {key: 'value', nested: {x: 1}},
+       a.property.chain, NOT (a)-[:BLOCKED]->(b), (c)<-[:OWNS]-(d)

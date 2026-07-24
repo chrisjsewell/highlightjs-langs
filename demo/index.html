@@ -16,6 +16,7 @@
     <!-- The language bundles self-register on the global `hljs`; load them AFTER core. -->
     <script src="../dist/restructuredtext.min.js"></script>
     <script src="../dist/myst.min.js"></script>
+    <script src="../dist/cypher.min.js"></script>
 
     <style>
       body {
@@ -92,6 +93,16 @@ A directive with an option and $E = mc^2$ inline math.
 +++
 
 See {ref}`target` for details.
+</code></pre>
+      </section>
+
+      <section>
+        <h2>Cypher</h2>
+        <pre><code class="language-cypher">// Find friends of Alice
+MATCH (a:Person {name: $name})-[r:KNOWS]-&gt;(b:Person)
+WHERE a.age &gt; 30 AND NOT (b)-[:BLOCKED]-&gt;(a)
+RETURN b.name, collect(b.city) AS cities, count(r)
+ORDER BY b.name LIMIT 10
 </code></pre>
       </section>
     </div>

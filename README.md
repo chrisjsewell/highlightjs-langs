@@ -17,6 +17,7 @@ for where third-party grammars live in the ecosystem.
 | ----------------- | ----------------------------------- | ------------------------------------------------- | ------------------------------- |
 | reStructuredText  | `restructuredtext`, `rst`, `rest`   | `highlightjs-langs/restructuredtext` (or `/rst`)  | `dist/restructuredtext.min.js`  |
 | MyST Markdown     | `myst`, `mystmd`, `myst-markdown`   | `highlightjs-langs/myst`                           | `dist/myst.min.js`              |
+| Cypher (Neo4j)    | `cypher`                            | `highlightjs-langs/cypher`                         | `dist/cypher.min.js`            |
 
 ## Usage — browser / CDN
 
@@ -100,6 +101,15 @@ const { restructuredtext, myst, registerLanguages } = require("highlightjs-langs
 - `amsmath` environments
 - Footnotes
 
+### Cypher
+
+- Keywords (openCypher + Neo4j extensions) and literals
+- Node labels and relationship types (`(n:Person)`, `-[r:KNOWS]->`) as types
+- Relationship-pattern arrows
+- Called functions (`collect(…)`, `db.labels(…)`) as function invocations
+- Parameters (`$param`, `` $`odd name` ``)
+- Strings, backtick-escaped identifiers, numbers, line and block comments
+
 ## Known limitations
 
 Being upfront about what these grammars deliberately do *not* do:
@@ -115,12 +125,17 @@ Being upfront about what these grammars deliberately do *not* do:
 
 ## Looking for other languages?
 
-This package intentionally sticks to reStructuredText and MyST, and does not duplicate grammars
-that already exist:
+This package does not duplicate grammars that are already maintained elsewhere:
 
-- **Cypher** — already available as [highlightjs-cypher](https://github.com/highlightjs/highlightjs-cypher).
 - **Jinja** templates — covered by highlight.js core via the `django` grammar (alias `jinja`).
 - **Twig** — covered by highlight.js core via the `twig` grammar.
+
+Cypher *is* included here despite the pre-existing
+[highlightjs-cypher](https://github.com/highlightjs/highlightjs-cypher): that package is
+unmaintained (last published 2023), declares unrelated runtime dependencies, and its
+function-call pattern backtracked quadratically (an 80 KB whitespace line froze highlighting for
+~14 s). Its CC0-licensed grammar was adopted, typed, re-scoped to documented highlight.js
+classes, and fixed here.
 
 ## Demo
 
@@ -147,6 +162,22 @@ Tests mirror highlight.js core's layout: `test/markup/<lang>/<name>.txt` is high
 byte-for-byte against `<name>.expect.txt`. **The `*.expect.txt` files are the behavioural
 specification of each grammar.** `npm run test:update` regenerates them — always review the diff
 carefully, and never regenerate blindly.
+
+### Regex safety
+
+Grammar regexes are the attack surface of a highlighter, so they are tested three ways:
+
+- [`test/regex-safety.test.ts`](test/regex-safety.test.ts) runs
+  [recheck](https://github.com/makenowjust-labs/recheck) (the ReDoS analyser also used by
+  highlight.js core) over **every** regex in every grammar, including the concatenations
+  highlight.js builds from multi-part `begin` arrays. A "vulnerable" verdict fails the suite;
+  deliberate exceptions live in an allowlist where each entry needs a written justification and
+  a covering timing test.
+- [`test/fuzz.test.ts`](test/fuzz.test.ts) highlights seeded, reproducible random documents
+  (adversarial atoms mixed with fixture fragments) under a per-case time budget
+  (`FUZZ_CASES=1000 npm test` for deeper runs).
+- `test/api.test.ts` pins known pathological shapes — regex floods that once blew up, kept as
+  regressions with hard time limits.
 
 ### Git hooks
 
@@ -183,4 +214,6 @@ again.)
 [MIT](LICENSE).
 
 The MyST CommonMark layer is adapted from highlight.js' own `markdown` grammar
-(BSD-3-Clause, © Ivan Sagalaev and the highlight.js contributors).
+(BSD-3-Clause, © Ivan Sagalaev and the highlight.js contributors). The Cypher grammar is derived
+from [highlightjs-cypher](https://github.com/highlightjs/highlightjs-cypher) (CC0-1.0, by
+Johannes Wienke and contributors).
