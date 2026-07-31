@@ -18,7 +18,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7
       # prek-action runs `prek run --all-files` with caching by default.
-      - uses: j178/prek-action@v2
+      - uses: j178/prek-action@v2.0.6
 
   typecheck:
     runs-on: ubuntu-latest
